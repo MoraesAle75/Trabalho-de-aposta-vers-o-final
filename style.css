@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffffffdc;
+}
+
+center {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+select {
+    padding: 5px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #e42626a8;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+canvas {
+    border: 1px solid #e02121;
+    background-color: white;
+}

@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faça sua aposta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <center>Faça sua aposta</center>
+    <br>
+
+    <form>
+        <select id="aposta">
+            <option value="1">Circulo</option>
+            <option value="2">Quadrado</option>
+            <option value="3">Retangulo</option>
+        </select>
+    </form>
+
+    <br>
+
+    <button id="jogar" onclick="desenhar()">Jogar</button>
+
+    <br><br>
+
+    <p>Jogadas: <label id="jogadas">0</label>/50</p>
+    <p>Acertos: <label id="acertos">0</label></p>
+    <p>Erros: <label id="erros">0</label></p>
+
+    <p id="resultado"></p>
+
+    <canvas id="x" width="300" height="300"
+        style="border: 1px solid #b72c6d;"></canvas>
+
+    <script>
+        let acertos = 0;
+        let erros = 0;
+        let jogadas = 0;
+
+        function desenhar() {
+
+            if (jogadas >= 50) {
+                return;
+            }
+
+            aposta = document.getElementById('aposta');
+            aposta = Number(aposta.value);
+
+            sorteio = Math.floor(Math.random() * (4 - 1) + 1);
+
+            x = document.getElementById('x').getContext("2d");
+            x.clearRect(0, 0, 300, 300);
+            x.beginPath();
+
+            if (sorteio == 1) {
+                x.fillStyle = "#cc0088";
+                x.strokeStyle = '#cc1';
+                x.arc(100, 75, 50, 0, 2 * 3.14);
+                x.fill();
+                x.stroke();
+            }
+            else if (sorteio == 2) {
+                x.fillStyle = "rgb(255, 0, 0)";
+                x.fillRect(10, 10, 50, 50);
+            }
+            else {
+                x.fillStyle = "rgb(255, 0, 0)";
+                x.fillRect(10, 10, 150, 50);
+            }
+
+            jogadas++;
+
+            if (aposta == sorteio) {
+                alert("Parabéns!");
+                acertos++;
+                document.getElementById('acertos').innerHTML = acertos;
+            }
+            else {
+                alert("Tente novamente!");
+                erros++;
+                document.getElementById('erros').innerHTML = erros;
+            }
+
+            document.getElementById('jogadas').innerHTML = jogadas;
+
+            // Verifica se chegou a 50 jogadas
+            if (jogadas == 50) {
+
+                document.getElementById('jogar').disabled = true;
+                 alert("Alerta!!!!!");
+
+                if (acertos >= 31) {
+                    mensagem = "Excelente jogada!";
+                }
+                else if (acertos >= 11) {
+                    mensagem = "Bom!";
+                }
+                else if (acertos >= 6) {
+                    mensagem = "Ruim!";
+                }
+                else {
+                    mensagem = "Péssimo!";
+                }
+
+                document.getElementById('resultado').innerHTML =
+                    "Fim de jogo! " + mensagem +
+                    "<br>Você acertou " + acertos + " de 50 jogadas.";
+
+                alert("Fim de jogo! " + mensagem);
+            }
+        }
+    </script>
+
+</body>
+</html>
